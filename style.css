@@ -1,0 +1,26 @@
+.fs-1,.fs-3,.scoreH,.scoreC{
+    color: #4e4848;
+}
+.row{
+    text-align: center;
+}
+.btn{
+    color: aliceblue;
+    background-color: #5f5c5c;
+}
+#ComputerCoiceImg{
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+.scoreHeight{
+    height: 100px;
+}
+.footer {
+height: 20px;
+color: aliceblue;
+background-color: #5f5c5c;
+font-size: 12px;
+padding-top: 3px;
+text-align: center;
+}
