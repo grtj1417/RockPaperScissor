@@ -16,6 +16,26 @@
 .scoreHeight{
     height: 100px;
 }
+
+dialog {
+    width: min-content;
+    height: min-content;
+    padding: 5px 30px;
+    border-radius: 10px;
+    border: 5px solid #4e4848;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+h3 {
+    white-space: nowrap;
+    color: #4e4848;
+    font-size: 40px;
+    font-weight: bold;
+}
+
 .footer {
 height: 20px;
 color: aliceblue;

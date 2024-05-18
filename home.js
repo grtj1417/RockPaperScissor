@@ -2,29 +2,19 @@ var HUMAN_SCORE = 0;
 var COMPUTER_SCORE = 0;
 const scoreH = document.querySelector(".scoreH");
 const scoreC = document.querySelector(".scoreC");
-function getRandomInt(max)
-{
-    return Math.floor(Math.random() * max);
-    }
+const dialog = document.querySelector("dialog");
+const ComputerCoiceImg = document.querySelector("#ComputerCoiceImg");
 
-function getComputerChoice()
-{
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function getComputerChoice() {
     var computerChoice = getRandomInt(3);
-    if(computerChoice === 0){
-        console.log("computer:rock");
-    }else if(computerChoice === 1){
-        console.log("computer:paper");
-    }else{
-        console.log("computer:scissor")
-    }
     return computerChoice;
 }
 
-
-const ComputerCoiceImg = document.querySelector("#ComputerCoiceImg");
-
-function playRound(humanChoice)
-{
+function playRound(humanChoice) {
     var computerChoice = getComputerChoice();
     if(computerChoice === 0){
         ComputerCoiceImg.src = "./img/rock.png";
@@ -35,73 +25,77 @@ function playRound(humanChoice)
     }
 
     if(humanChoice == computerChoice){
-        console.log("tie");
         return 0;
     }
 
     if(humanChoice === 0 && computerChoice === 1){
-        console.log("you lose");
         return -1;
     }else if(humanChoice === 0 && computerChoice === 2){
-        console.log("you win");
         return 1;
     }
 
     if(humanChoice === 1 && computerChoice === 2){
-        console.log("you lose");
         return -1;
     }else if(humanChoice === 1 && computerChoice === 0){
-        console.log("you win");
         return 1;
     }
 
     if(humanChoice === 2 && computerChoice === 0){
-        console.log("you lose");
         return -1;
     }else if(humanChoice === 2 && computerChoice === 1){
-        console.log("you win");
         return 1;
     }
 }
 
-function updateScore(choices)
-{
+function updateScore(choices) {
     if (choices === "computer") {
-        console.log("computer's score:" + COMPUTER_SCORE);
         scoreC.textContent = COMPUTER_SCORE;
     } else {
-        console.log("your score:" + HUMAN_SCORE);
         scoreH.textContent = HUMAN_SCORE;
     }
 }
-function playGame(humanChoice)
-{
+
+function reset() {
+    scoreH.textContent = "0";
+    scoreC.textContent = "0";
+    ComputerCoiceImg.src = "./img/computerDefault.jpg";
+    HUMAN_SCORE = 0;
+    COMPUTER_SCORE = 0;
+}
+
+function check_is_gameover() {
+    if(HUMAN_SCORE === 5){
+        scoreH.textContent = "5";
+        const tieMessage = document.querySelector("h3");
+        tieMessage.textContent = "you win";
+        dialog.showModal();
+        reset();
+    }else if(COMPUTER_SCORE === 5){
+        scoreC.textContent = "5";
+        const tieMessage = document.querySelector("h3");
+        tieMessage.textContent = "you lose";
+        dialog.showModal(); 
+        reset();
+    }
+}
+
+function playGame(humanChoice) {
     var res = playRound(humanChoice);
 
     if(res === 1){
         HUMAN_SCORE++;
     }else if(res === -1){
         COMPUTER_SCORE++;
+    }else{
+        const tieMessage = document.querySelector("h3");
+        tieMessage.textContent = "tie";
+        dialog.showModal();
     }
 
-    // human score
     updateScore("computer");
-    // computer score
     updateScore("human");
 
-    // game over & reset
-    if(HUMAN_SCORE === 5){
-        alert("You win")
-        scoreH.textContent = "0";
-        scoreC.textContent = "0";
-        ComputerCoiceImg.src = "./img/computerDefault.jpg";
-    }else if(COMPUTER_SCORE === 5){
-        alert("You lose")
-        scoreH.textContent = "0";
-        scoreC.textContent = "0";
-        ComputerCoiceImg.src = "./img/computerDefault.jpg";
-    }
-
+    check_is_gameover();
 }
 
 const btn0 = document.querySelector(".btn0");
@@ -117,4 +111,16 @@ btn1.addEventListener("click", () => {
 const btn2 = document.querySelector(".btn2");
 btn2.addEventListener("click", () => {
     playGame(2);
+});
+
+dialog.addEventListener("click", (event) => {
+    const rect = dialog.getBoundingClientRect();
+    const isInDialog =
+        rect.top <= event.clientY &&
+        event.clientY <= rect.top + rect.height &&
+        rect.left <= event.clientX &&
+        event.clientX <= rect.left + rect.width;
+    if (!isInDialog) {
+        dialog.close();
+    }
 });
