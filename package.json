@@ -1,0 +1,32 @@
+{
+  "name": "project_05_rockpaperscissor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "home.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grtj1417/RockPaperScissor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grtj1417/RockPaperScissor/issues"
+  },
+  "homepage": "https://github.com/grtj1417/RockPaperScissor#readme",
+  "dependencies": {
+    "css-loader": "^7.1.2",
+    "D": "^1.0.0",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "devDependencies": {
+    "mini-css-extract-plugin": "^2.9.0"
+  }
+}
